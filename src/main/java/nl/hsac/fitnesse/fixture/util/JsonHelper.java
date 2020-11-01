@@ -5,6 +5,7 @@ import nl.hsac.fitnesse.fixture.Environment;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.apache.wink.json4j.OrderedJSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,9 +27,9 @@ public class JsonHelper implements Formatter {
         String result = null;
         if (json != null){
             if (json.startsWith("{")) {
-                result = new JSONObject(json).toString(4);
+                result = new OrderedJSONObject(json).toString(4);
             } else if (json.startsWith("[")) {
-                JSONObject jsonObject = new JSONObject("{'a': " + json + "}");
+                JSONObject jsonObject = new OrderedJSONObject("{'a': " + json + "}");
                 org.json.JSONArray array = (org.json.JSONArray) jsonObject.get("a");
                 result = array.toString(4);
             }

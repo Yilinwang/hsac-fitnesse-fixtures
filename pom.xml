@@ -1,7 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>nl.hsac</groupId>
@@ -57,7 +54,7 @@
 		<!-- classpath that Fitnesse uses when not starting from IDE/maven -->
 		<standalone.classpath>wiki/fixtures</standalone.classpath>
 		<fitnesse.port>9090</fitnesse.port>
-		<extraFailsafeListeners></extraFailsafeListeners>
+		<extraFailsafeListeners/>
 	</properties>
 
 	<dependencies>
@@ -216,8 +213,13 @@
             <artifactId>mockito-core</artifactId>
             <version>2.23.4</version>
             <scope>test</scope>
-		</dependency>
-	</dependencies>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.wink</groupId>
+            <artifactId>wink-server</artifactId>
+            <version>1.4</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<outputDirectory>${standalone.classpath}</outputDirectory>
@@ -575,7 +577,27 @@
 					</execution>
 				</executions>
 			</plugin>
-		</plugins>
+		<plugin>
+                <groupId>edu.illinois.cs</groupId>
+                <artifactId>testrunner-maven-plugin</artifactId>
+                <version>1.0</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>edu.illinois.cs</groupId>
+                        <artifactId>idflakies</artifactId>
+                        <version>1.0.1</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <className>edu.illinois.cs.dt.tools.detection.DetectorPlugin</className>
+                </configuration>
+            </plugin>
+      <plugin>
+        <groupId>edu.illinois</groupId>
+        <artifactId>nondex-maven-plugin</artifactId>
+        <version>1.1.2</version>
+      </plugin>
+        </plugins>
 	</build>
 
 	<profiles>
@@ -653,3 +675,4 @@
 	</distributionManagement>
 
 </project>
+
